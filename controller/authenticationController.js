@@ -170,3 +170,27 @@ module.exports.login = login = async (req, res) => {
     res.status(500).json({ message: "Error: " + error.message });
   }
 };
+
+
+module.exports.logout = logout = async (req, res) => {
+  try {
+    const userSessionId = req.params.id;
+    console.log(userSessionId)
+    const userSession = await UserSessionModel.findOneAndDelete({ user: userSessionId });
+
+    if (!userSession) {
+      return res.status(403).send({
+        message: "User Invalid",
+        data: userSession
+      });
+    }
+
+    // The rest of your code...
+
+    res.status(200).json({ message: "User logged out successfully.", data: userSession, status: 200 });
+  } catch (error) {
+    res.status(404).send({
+      message: error.message
+    });
+  }
+};
