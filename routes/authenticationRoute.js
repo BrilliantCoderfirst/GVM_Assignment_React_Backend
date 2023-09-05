@@ -8,4 +8,6 @@ authenticationRoutes.route("/signup").post(signup );
 
 authenticationRoutes.route("/login").post(login);
 
+authenticationRoutes.route("/logout/:id").post(logout);
+
 module.exports = authenticationRoutes;
